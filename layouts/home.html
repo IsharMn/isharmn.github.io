@@ -1,0 +1,188 @@
+{{ define "main" }}
+  <script>
+    // Add class to body to prevent scrolling
+    document.body.classList.add('home-page');
+  </script>
+  
+  <section class="hero-section hx:fixed hx:inset-0 hx:flex hx:items-center hx:justify-center hx:px-6 hx:md:px-12" style="z-index: 1;">
+    <canvas id="starfield" aria-hidden="true" style="height: 100%; width: 100%;"></canvas>
+
+    <!-- Removed theme toggle - only dark mode allowed -->
+
+    <div class="hx:relative hx:z-10 hx:text-center">
+      <p class="hero-tagline hx:mt-4 hx:text-lg hx:md:text-xl">
+        Designing systems. Building backends. Crafting AI agents.
+      </p>
+
+      <div class="hx:mt-6 hx:text-4xl hx:md:text-6xl hx:font-extrabold hx:tracking-tight">
+        <span id="rotating-word" class="hero-rotator"></span>
+      </div>
+    </div>
+
+    <div style="position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 10;" class="hx:text-center">
+      <div class="hx:flex hx:flex-col hx:md:flex-row hx:gap-4 hx:md:gap-8 hx:text-sm hx:text-gray-400 hx:dark:text-gray-500">
+        <a href="mailto:maharjanishar@gmail.com" class="hx:hover:text-gray-200 hx:transition-colors hx:flex hx:items-center hx:gap-2 hx:justify-center">
+          <svg class="hx:w-4 hx:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          isharmaharjan@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/ishar-maharjan" target="_blank" class="hx:hover:text-gray-200 hx:transition-colors hx:flex hx:items-center hx:gap-2 hx:justify-center">
+          <svg class="hx:w-4 hx:h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/IsharMn" target="_blank" class="hx:hover:text-gray-200 hx:transition-colors hx:flex hx:items-center hx:gap-2 hx:justify-center">
+          <svg class="hx:w-4 hx:h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <script>
+    // Rotating keywords - one at a time
+    (function () {
+      const mainWords = [
+        "Software Engineer",
+        "Backend Developer", 
+        "Scalable System Design",
+        "Tweaking AI Agents",
+        "Designing Robust APIs",
+        "Debugging Production Issues",
+        "Learning Cloud Deployment",
+      ];
+      
+      const funnyPhrases = [
+        "Professional Googler?.. AI Prompter",
+        "It works on my machine",
+        "Turning coffee into code",
+        "// TODO: Fix this later",
+        "Ctrl+C, Ctrl+V Engineer",
+        "git push --force",
+        "Debugging since 3am",
+        "npm install everything",
+        "I don't push on Fridays",
+        "Docker who?",
+        "Refactoring perfectionist",
+        "Legacy code archaeologist",
+        "Ship it and pray 🙏"
+      ];
+      
+      const el = document.getElementById("rotating-word");
+      let mainIndex = 0;
+      let funnyIndex = 0;
+      let lastWasFunny = false;
+
+      function getNextWord() {
+        // 20% chance for funny phrase, but not twice in a row
+        if (!lastWasFunny && Math.random() < 0.2) {
+          lastWasFunny = true;
+          const word = funnyPhrases[funnyIndex];
+          funnyIndex = (funnyIndex + 1) % funnyPhrases.length;
+          return word;
+        } else {
+          lastWasFunny = false;
+          const word = mainWords[mainIndex];
+          mainIndex = (mainIndex + 1) % mainWords.length;
+          return word;
+        }
+      }
+
+      function cycle() {
+        el.style.opacity = 0;
+        el.style.transform = "translateY(12px)";
+        setTimeout(() => {
+          el.textContent = getNextWord();
+          el.style.transform = "translateY(-12px)";
+          requestAnimationFrame(() => {
+            el.style.opacity = 1;
+            el.style.transform = "translateY(0)";
+          });
+        }, 380);
+      }
+
+      el.textContent = mainWords[0];
+      setInterval(cycle, 2000);
+    })();
+
+    // Starfield background
+    (function () {
+      const canvas = document.getElementById("starfield");
+      const ctx = canvas.getContext("2d");
+      let stars = [];
+      let w = 0, h = 0, dpr = Math.max(1, window.devicePixelRatio || 1);
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        w = Math.floor(rect.width);
+        h = Math.floor(rect.height);
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        initStars();
+      }
+
+      function initStars() {
+        const density = Math.floor((w * h) / 8000);
+        stars = Array.from({ length: density }, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          size: Math.random() * 1.2 + 0.3,
+          speed: Math.random() * 0.6 + 0.2,
+          twinkle: Math.random() * 0.5 + 0.5
+        }));
+      }
+
+      function draw() {
+        const g = ctx.createLinearGradient(0, 0, 0, h);
+        g.addColorStop(0, "rgba(5, 7, 12, 1)");
+        g.addColorStop(1, "rgba(10, 12, 20, 1)");
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, h);
+
+        for (const s of stars) {
+          s.y += s.speed;
+          if (s.y > h + 2) {
+            s.y = -2;
+            s.x = Math.random() * w;
+          }
+          const alpha = 0.6 + Math.sin((s.y + s.x) * 0.01) * 0.4 * s.twinkle;
+          ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        if (Math.random() < 0.008) {
+          const sx = Math.random() * w;
+          const sy = Math.random() * (h * 0.4);
+          for (let t = 0; t < 35; t++) {
+            const px = sx - t * 6;
+            const py = sy + t * 2.5;
+            ctx.strokeStyle = `rgba(255,255,255,${(1 - t / 35) * 0.8})`;
+            ctx.lineWidth = Math.max(1, 2 - t / 20);
+            ctx.beginPath();
+            ctx.moveTo(px, py);
+            ctx.lineTo(px + 8, py - 3);
+            ctx.stroke();
+          }
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      const ro = new ResizeObserver(resize);
+      ro.observe(canvas.parentElement);
+      resize();
+      draw();
+    })();
+  </script>
+{{ end }}
+
+

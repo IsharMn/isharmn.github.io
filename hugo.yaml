@@ -1,0 +1,61 @@
+baseURL: 'https://isharmaharjan.com.np/'
+languageCode: 'en-us'
+title: 'Ishar Maharjan'
+theme: 'hextra'
+
+params:
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+      path: images/logo-autumn-fox.png
+      link: /
+      width: 50
+      height: 50
+
+  # Add theme configuration
+  theme:
+    displayToggle: false  # Enable the theme toggle
+    default: 'dark'    # Options: 'light', 'dark', or 'system'
+
+  footer:
+    enable: false
+
+  favicon: '/favicon.ico'
+  appleTouchIcon: '/apple-touch-icon.png'
+  androidChrome192: '/android-chrome-192x192.png'
+  androidChrome512: '/android-chrome-512x512.png'
+
+  
+menu:
+  main:
+    - name: Home
+      pageRef: /
+      weight: 1
+    - name: Projects
+      pageRef: /projects
+      weight: 2
+    - name: Blogs
+      pageRef: /blogs
+      weight: 3
+    - name: Resume
+      pageRef: /resume
+      weight: 4
+    - name: Search
+      weight: 5
+      params:
+        type: search
+    - name: GitHub
+      url: "https://github.com/IsharMn"
+      weight: 6
+      params:
+        icon: github
+    - name: LinkedIn
+      url: "https://www.linkedin.com/in/ishar-maharjan/"
+      weight: 7
+      params:
+        icon: linkedin
+
+caches:
+  images:
+    dir: :cacheDir/images

@@ -1,0 +1,32 @@
+{{ define "main" }}
+<div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; z-index: 10;">
+  <div style="text-align: center; max-width: 42rem; padding: 0 1.5rem;">
+    <h1 style="font-size: 2.25rem; font-weight: bold; color: #f9fafb; margin-bottom: 1rem;">
+      {{ if .Title }}{{ .Title }}{{ else }}Page in Progress{{ end }}
+    </h1>
+
+    <!-- Subtitle -->
+    <p style="font-size: 1.25rem; color: #d1d5db; margin-bottom: 3rem;">
+      🚧 This page is currently under construction 🚧
+    </p>
+
+    <!-- Progress Bar -->
+    <div style="max-width: 28rem; margin: 0 auto 2rem;">
+      <div style="background-color: #374151; border-radius: 9999px; height: 0.75rem; overflow: hidden;">
+        <div style="background: linear-gradient(to right, #3b82f6, #8b5cf6); height: 100%; border-radius: 9999px; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; width: 45%;"></div>
+      </div>
+      <p style="font-size: 0.875rem; color: #9ca3af; margin-top: 0.5rem;">45% Complete</p>
+    </div>
+
+    <!-- Fun Message -->
+    <div style="background-color: #1f2937; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 2rem; max-width: 42rem; margin-left: auto; margin-right: auto;">
+      <p style="color: #d1d5db; margin-bottom: 1rem;">
+        Our team of highly trained hamsters is working tirelessly to bring you amazing content! 🐹
+      </p>
+      <p style="font-size: 0.875rem; color: #9ca3af;">
+        In the meantime, feel free to check out the other pages or come back soon!
+      </p>
+    </div>
+  </div>
+</div>
+{{ end }}

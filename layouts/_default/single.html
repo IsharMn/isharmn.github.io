@@ -1,0 +1,33 @@
+{{ define "main" }}
+<div class="hx:container hx:mx-auto hx:px-6 hx:py-16 hx:max-w-4xl hx:text-center">
+  <!-- Subtitle -->
+  <p class="hx:text-xl hx:text-gray-300 hx:mb-8">
+    🛠️ This page is being crafted with care 🛠️
+  </p>
+
+  <!-- Progress Bar -->
+  <div class="hx:max-w-md hx:mx-auto hx:mb-8">
+    <div class="hx:bg-gray-700 hx:rounded-full hx:h-3 hx:overflow-hidden">
+      <div class="hx:bg-gradient-to-r hx:from-green-500 hx:to-teal-600 hx:h-full hx:rounded-full hx:animate-pulse" style="width: 45%"></div>
+    </div>
+    <p class="hx:text-sm hx:text-gray-400 hx:mt-2">35% Complete</p>
+  </div>
+
+  <!-- Content Area (if any) -->
+  {{ if .Content }}
+  <div class="hx:prose hx:prose-invert hx:max-w-none hx:mb-8">
+    {{ .Content }}
+  </div>
+  {{ end }}
+
+  <!-- Fun Message -->
+  <div class="hx:bg-gray-800 hx:rounded-lg hx:p-6 hx:mb-8 hx:max-w-2xl hx:mx-auto">
+    <p class="hx:text-gray-300 hx:mb-4">
+      Our creative team of hamsters is putting the finishing touches on this masterpiece! 🎨
+    </p>
+    <p class="hx:text-sm hx:text-gray-400">
+      Check back soon for something amazing!
+    </p>
+  </div>
+
+{{ end }}
